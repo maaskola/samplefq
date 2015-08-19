@@ -86,8 +86,8 @@ void parse_file(const std::string& path, X fnc, Args& ... args) {
   fnc(in, args...);
   if (in.bad())
     throw Exception::File::Reading(path);
-  if (in.fail())
-    throw Exception::File::Parsing(path);
+  // if (in.fail())
+  //   throw Exception::File::Parsing(path);
 };
 
 #endif
