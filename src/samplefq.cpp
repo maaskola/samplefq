@@ -4,6 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include <random>
+#include "io.hpp"
 
 using namespace std;
 
@@ -34,21 +35,20 @@ vector<T> sample_without_replacement(T n, T N) {
   return(w);
 }
 
-void print_out(const string &path, const vector<size_t> idxs, ostream &os) {
+void print_out(istream &is, const vector<size_t> &idxs, ostream &os) {
   string line;
-  ifstream ifs(path);
   size_t idx = 0;
   auto it = begin(idxs);
-  while(getline(ifs, line))
+  while(getline(is, line))
     if(line[0] == '@') {
       if(idx++ == *it) {
         it++;
         os << line << endl;
-        getline(ifs, line);
+        getline(is, line);
         os << line << endl;
-        getline(ifs, line);
+        getline(is, line);
         os << line << endl;
-        getline(ifs, line);
+        getline(is, line);
         os << line << endl;
       }
     }
@@ -73,9 +73,9 @@ int main(int argc, char **argv) {
 
   sort(begin(idxs), end(idxs));
 
-  print_out(path1, idxs, cout);
+  parse_file(path1, print_out, idxs, cout);
   if(path2 != "")
-    print_out(path2, idxs, cerr);
+    parse_file(path2, print_out, idxs, cerr);
 
   return EXIT_SUCCESS;
 }

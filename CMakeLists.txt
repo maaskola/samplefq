@@ -50,7 +50,7 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 
 FIND_PACKAGE(Boost COMPONENTS
-  program_options system filesystem date_time REQUIRED)
+  program_options system filesystem date_time iostreams REQUIRED)
 IF(Boost_FOUND)
   ADD_DEFINITIONS( "-DHAS_BOOST" )
   INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})

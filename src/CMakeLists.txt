@@ -1,2 +1,9 @@
 ADD_EXECUTABLE(samplefq samplefq.cpp)
+TARGET_LINK_LIBRARIES(samplefq
+  -L${Boost_LIBRARY_DIRS}
+  ${Boost_FILESYSTEM_LIBRARY}
+  ${Boost_SYSTEM_LIBRARY}
+  ${Boost_IOSTREAMS_LIBRARY}
+  )
+
 INSTALL(TARGETS samplefq DESTINATION bin)
