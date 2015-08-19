@@ -8,8 +8,7 @@
 
 using namespace std;
 
-size_t count_seq(istream &&ifs) {
-  size_t cnt = 0;
+void count_seq(istream &ifs, size_t &cnt) {
   string line;
   while(getline(ifs, line))
     if(line[0] == '@') {
@@ -18,7 +17,6 @@ size_t count_seq(istream &&ifs) {
       getline(ifs, line);
       getline(ifs, line);
     }
-  return cnt;
 }
 
 template <typename T>
@@ -67,7 +65,8 @@ int main(int argc, char **argv) {
   if(argc == 4)
     path2 = argv[3];
 
-  const size_t N = count_seq(ifstream(path1));
+  size_t N = 0;
+  parse_file(path1, count_seq, N);
 
   vector<size_t> idxs = sample_without_replacement(n, N);
 
