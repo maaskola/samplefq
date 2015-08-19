@@ -68,6 +68,11 @@ int main(int argc, char **argv) {
   size_t N = 0;
   parse_file(path1, count_seq, N);
 
+  if(N < n) {
+    cerr << "Error: cannot sample " << n << " sequence when there are only " << N << " sequences in " << path1 << endl;
+    return EXIT_FAILURE;
+  }
+
   vector<size_t> idxs = sample_without_replacement(n, N);
 
   sort(begin(idxs), end(idxs));
