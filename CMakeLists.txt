@@ -4,6 +4,9 @@ PROJECT(samplefq)
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
+# if you want the full compiler output, uncomment the following line
+# SET(CMAKE_VERBOSE_MAKEFILE ON)
+
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
 SET(CMAKE_BUILD_TYPE Release)
