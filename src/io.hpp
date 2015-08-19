@@ -53,7 +53,8 @@ struct Access : public std::runtime_error {
 };
 struct Reading : public std::runtime_error {
   Reading(const std::string& path)
-      : std::runtime_error("Error: reading from file failed: '" + path + "'."){};
+      : std::runtime_error("Error: reading from file failed: '" + path +
+                           "'."){};
 };
 struct Parsing : public std::runtime_error {
   Parsing(const std::string& path)
@@ -63,29 +64,25 @@ struct Parsing : public std::runtime_error {
 }
 
 template <typename X, typename... Args>
-void parse_file(const std::string& path, X fnc, Args& ... args) {
+void parse_file(const std::string& path, X fnc, Args&... args) {
   if (not boost::filesystem::exists(path))
     throw Exception::File::Existence(path);
 
   bool use_gzip = path.size() >= 3 and path.substr(path.size() - 3, 3) == ".gz";
-  bool use_bzip2 = path.size() >= 4 and path.substr(path.size() - 4, 4) == ".bz2";
+  bool use_bzip2 =
+      path.size() >= 4 and path.substr(path.size() - 4, 4) == ".bz2";
   std::ios_base::openmode flags = std::ios_base::in;
-  if (use_gzip or use_bzip2)
-    flags |= std::ios_base::binary;
+  if (use_gzip or use_bzip2) flags |= std::ios_base::binary;
 
   std::ifstream file(path, flags);
-  if (not file)
-    throw Exception::File::Access(path);
+  if (not file) throw Exception::File::Access(path);
   boost::iostreams::filtering_stream<boost::iostreams::input> in;
-  if (use_gzip)
-    in.push(boost::iostreams::gzip_decompressor());
-  if (use_bzip2)
-    in.push(boost::iostreams::bzip2_decompressor());
+  if (use_gzip) in.push(boost::iostreams::gzip_decompressor());
+  if (use_bzip2) in.push(boost::iostreams::bzip2_decompressor());
   in.push(file);
 
   fnc(in, args...);
-  if (in.bad())
-    throw Exception::File::Reading(path);
+  if (in.bad()) throw Exception::File::Reading(path);
   // if (in.fail())
   //   throw Exception::File::Parsing(path);
 };
