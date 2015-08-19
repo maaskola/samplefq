@@ -8,14 +8,14 @@
 
 using namespace std;
 
-void count_seq(istream &ifs, size_t &cnt) {
+void count_seq(istream &is, size_t &cnt) {
   string line;
-  while(getline(ifs, line))
+  while(not is.eof() and getline(is, line))
     if(line[0] == '@') {
       cnt++;
-      getline(ifs, line);
-      getline(ifs, line);
-      getline(ifs, line);
+      getline(is, line);
+      getline(is, line);
+      getline(is, line);
     }
 }
 
