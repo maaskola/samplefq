@@ -5,7 +5,9 @@
 #include <algorithm>
 #include <random>
 
-size_t count_seq(istream &ifs) {
+using namespace std;
+
+size_t count_seq(istream &&ifs) {
   size_t cnt = 0;
   string line;
   while(getline(ifs, line))
@@ -20,8 +22,8 @@ size_t count_seq(istream &ifs) {
 
 template <typename T>
 vector<T> sample_without_replacement(T n, T N) {
-  vector v(N);
-  std::iota(begin(N), end(N), 0);
+  vector<T> v(N);
+  std::iota(begin(v), end(v), 0);
 
   std::random_device rd;
   std::mt19937 g(rd());
@@ -54,20 +56,26 @@ void print_out(const string &path, const vector<size_t> idxs, ostream &os) {
 
 int main(int argc, char **argv) {
 
-  int n = atoi(argv[1]);
+  if(argc < 3 or argc > 4) {
+    cerr << "Arguments: N PATH1 [PATH2]" << endl;
+    return EXIT_FAILURE;
+  }
 
-  vector<string> paths;
-  for(size_t i = 2; i < argc; ++i)
-    paths.push_back(argv[i]);
+  size_t n = atoi(argv[1]);
+  string path1 = argv[2];
+  string path2 = "";
+  if(argc == 4)
+    path2 = argv[3];
 
-  const size_t N = count_seq(ifstream(paths[0]));
+  const size_t N = count_seq(ifstream(path1));
 
-  vector<size_t> idxs = sample_without_replacment(n, N);
+  vector<size_t> idxs = sample_without_replacement(n, N);
 
   sort(begin(idxs), end(idxs));
 
-  print_out(path[0], idxs, cout);
-  print_out(path[1], idxs, cerr);
+  print_out(path1, idxs, cout);
+  if(path2 != "")
+    print_out(path2, idxs, cerr);
 
   return EXIT_SUCCESS;
 }
