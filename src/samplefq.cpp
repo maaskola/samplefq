@@ -76,9 +76,14 @@ int main(int argc, char **argv) {
 
   sort(begin(idxs), end(idxs));
 
-  parse_file(path1, print_out, idxs, cout);
-  if (path2 != "")
-    parse_file(path2, print_out, idxs, cerr);
+#pragma omp sections
+  {
+    { parse_file(path1, print_out, idxs, cout); }
+#pragma omp section
+    {
+      if (path2 != "") parse_file(path2, print_out, idxs, cerr);
+    }
+  }
 
   return EXIT_SUCCESS;
 }
