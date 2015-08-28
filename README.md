@@ -21,16 +21,20 @@ written to the standard error stream.
 
 Installation
 ------------
-1. create a directory where the code should be compiled
-2. change to it
-3. invoke CMake (assuming ```$SAMPLEFQ_ROOT_DIR``` is the path of this repository)
-4. compile
-5. install
+1. clone the repository
+2. move into the directory
+3. create a directory where the code should be compiled
+4. change to it
+5. invoke CMake, specifying the path where the software should be installed
+6. compile
+7. install
 
 ```sh
+git clone https://github.com/maaskola/samplefq.git
+cd samplefq
 mkdir build
 cd build
-cmake $SAMPLEFQ_ROOT_DIR -DCMAKE_INSTALL_PREFIX=/where/to/install
+cmake .. -DCMAKE_INSTALL_PREFIX=/where/to/install
 make
 make install
 ```
