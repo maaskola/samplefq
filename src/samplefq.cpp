@@ -83,11 +83,11 @@ int main(int argc, char **argv) {
     po::options_description sampling_options("Sampling options", cols);
     sampling_options.add_options()
       ("read1,1", po::value(&path1)->required(),
-       "Path to a FASTAQ file. [REQUIRED]")
+       "Path to FASTAQ file. [REQUIRED]")
       ("read2,2", po::value(&path2),
-       "Path to a FASTAQ file. Has to be paired with the first.")
+       "Path to FASTAQ file. Has to be paired with the first.")
       ("sample,k", po::value(&k)->required(),
-       "How many sequences to sample without replacement. [REQUIRED]")
+       "How many sequences to sample. [REQUIRED]")
       ("size,n", po::value(&n),
        "How many sequences there are in the FASTQ files. "
        "If not specified it will be determined by reading the first FASTQ file prior to sampling.")
@@ -185,8 +185,17 @@ int main(int argc, char **argv) {
          << "Copyright (C) 2015 Jonas Maaskola\n"
             "Provided under GNU General Public License Version 3 or later.\n"
             "See the file COPYING provided with this software for details of "
-            "the license.\n" << endl;
+            "the license.\n"
+         << endl;
     // cout << limit_line_length(gen_usage_string(), cols) << endl; // TODO
+    cout << "This program samples sequences without replacement from one or a pair of FASTQ\n"
+            "files. The purpose for doing this is saturation analysis, i.e. to determine\n"
+            "whether the performed sequencing has reached saturation.\n"
+         << endl;
+    cout << "Sequences sampled from the first (or only) FASTQ file are written to the\n"
+            "standard output stream, while sequences sampled from the second FASTQ file are\n"
+            "written to the standard error stream.\n"
+         << endl;
     cout << desc << "\n";
     return EXIT_SUCCESS;
   }
