@@ -196,6 +196,10 @@ int main(int argc, char **argv) {
             "standard output stream, while sequences sampled from the second FASTQ file are\n"
             "written to the standard error stream.\n"
          << endl;
+    cout << "Note that the input FASTQ files may also be compressed using gzip or bzip2.\n"
+            "Depending on their filename ending (.gz or .bz2), they will be uncompressed on\n"
+            "the fly.\n"
+         << endl;
     cout << desc << "\n";
     return EXIT_SUCCESS;
   }
