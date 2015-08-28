@@ -37,7 +37,7 @@ void print_out(istream &is, const vector<size_t> &idxs, ostream &os) {
   string line;
   size_t idx = 0;
   auto it = begin(idxs);
-  while (getline(is, line))
+  while (it != end(idxs) and getline(is, line))
     if (line[0] == '@') {
       if (idx++ == *it) {
         it++;
