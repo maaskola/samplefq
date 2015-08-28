@@ -1,3 +1,7 @@
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
+
+CONFIGURE_FILE(git_config.hpp.in git_config.hpp)
+
 ADD_EXECUTABLE(samplefq samplefq.cpp)
 TARGET_LINK_LIBRARIES(samplefq
   -L${Boost_LIBRARY_DIRS}
