@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <random>
 #include <boost/program_options.hpp>
+#include <omp.h>
 #include "io.hpp"
 #include "sample.hpp"
 #include "git_config.hpp"
@@ -50,6 +51,7 @@ int main(int argc, char **argv) {
 
   size_t k = 0, n = 0, seed = 0;
   string path1 = "", path2 = "";
+  bool single_threaded = false;
 
   Verbosity verbosity = Verbosity::Info;
 
@@ -80,8 +82,8 @@ int main(int argc, char **argv) {
        "If not specified it will be determined by reading the first FASTQ file prior to sampling.")
       ("seed,s", po::value(&seed),
        "Seed to initialize the pseudo random number generator.")
-//    ("threads,t", po::value(&num_threads)->default_value(num_threads),
-//     "The number of threads.");
+      ("onethread", po::bool_switch(&single_threaded),
+       "Run single threaded. By default, two threads are used when processing paired FASTQ files.");
       ;
 
 
@@ -263,6 +265,9 @@ int main(int argc, char **argv) {
   vector<size_t> idxs = sample_without_replacement(k, n, rng);
 
   sort(begin(idxs), end(idxs));
+
+  if (single_threaded)
+    omp_set_num_threads(1);
 
 #pragma omp sections
   {
