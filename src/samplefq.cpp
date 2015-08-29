@@ -24,15 +24,12 @@ void count_seq(istream &is, size_t &cnt) {
     }
 }
 
-template <typename T>
-vector<T> sample_without_replacement(T k, T n) {
+template <typename T, typename RNG>
+vector<T> sample_without_replacement(T k, T n, RNG &&rng) {
   vector<T> v(n);
   std::iota(begin(v), end(v), 0);
 
-  std::random_device rd;
-  std::mt19937 g(rd());
-
-  std::shuffle(v.begin(), v.end(), g);
+  std::shuffle(v.begin(), v.end(), rng);
   vector<T> w(k);
   copy_n(begin(v), k, begin(w));
   return (w);
@@ -268,7 +265,12 @@ int main(int argc, char **argv) {
     return EXIT_FAILURE;
   }
 
-  vector<size_t> idxs = sample_without_replacement(k, n);
+  std::random_device rd;
+  std::mt19937 rng(rd());
+  if (vm.count("seed"))
+    rng.seed(seed);
+
+  vector<size_t> idxs = sample_without_replacement(k, n, rng);
 
   sort(begin(idxs), end(idxs));
 
