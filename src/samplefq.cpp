@@ -79,7 +79,7 @@ int main(int argc, char **argv) {
        "How many sequences to sample. [REQUIRED]")
       ("size,n", po::value(&n),
        "How many sequences there are in the FASTQ files. "
-       "If not specified it will be determined by reading the first FASTQ file prior to sampling.")
+       "If not specified this will be determined by reading the first FASTQ file prior to sampling.")
       ("seed,s", po::value(&seed),
        "Seed to initialize the pseudo random number generator.")
       ("onethread", po::bool_switch(&single_threaded),
