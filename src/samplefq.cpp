@@ -6,6 +6,7 @@
 #include <random>
 #include <boost/program_options.hpp>
 #include "io.hpp"
+#include "sample.hpp"
 #include "git_config.hpp"
 #include "verbosity.hpp"
 
@@ -22,17 +23,6 @@ void count_seq(istream &is, size_t &cnt) {
       getline(is, line);
       getline(is, line);
     }
-}
-
-template <typename T, typename RNG>
-vector<T> sample_without_replacement(T k, T n, RNG &&rng) {
-  vector<T> v(n);
-  std::iota(begin(v), end(v), 0);
-
-  std::shuffle(v.begin(), v.end(), rng);
-  vector<T> w(k);
-  copy_n(begin(v), k, begin(w));
-  return (w);
 }
 
 void print_out(istream &is, const vector<size_t> &idxs, ostream &os) {
