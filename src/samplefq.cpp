@@ -72,9 +72,9 @@ int main(int argc, char **argv) {
     po::options_description sampling_options("Sampling options", cols);
     sampling_options.add_options()
       ("read1,1", po::value(&path1)->required(),
-       "Path to FASTAQ file. [REQUIRED]")
+       "Path to FASTQ file. [REQUIRED]")
       ("read2,2", po::value(&path2),
-       "Path to FASTAQ file. Has to be paired with the first.")
+       "Path to FASTQ file. Has to be paired with the first.")
       ("sample,k", po::value(&k)->required(),
        "How many sequences to sample. [REQUIRED]")
       ("size,n", po::value(&n),
