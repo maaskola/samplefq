@@ -3,8 +3,8 @@ samplefq
 
 License
 -------
-Copyright (C) 2015 Jonas Maaskola
-Provided under GNU General Public License Version 3 or later.
+Copyright (C) 2015 Jonas Maaskola  
+Provided under GNU General Public License Version 3 or later.  
 See the file COPYING provided with this software for details of the license.
 
 Purpose
