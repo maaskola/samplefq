@@ -19,6 +19,12 @@ Sequences sampled from the first (or only) FASTQ file are written to the
 standard output stream, while sequences sampled from the second FASTQ file are
 written to the standard error stream.
 
+Features
+--------
+Apart from FASTQ files, sampling can also be done from FASTA files. Input files
+can be compressed with gzip or bzip2, and are uncompressed on the fly. Two
+threads are used during output when pairs of files are processed.
+
 Installation
 ------------
 1. clone the repository
