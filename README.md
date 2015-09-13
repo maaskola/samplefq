@@ -53,3 +53,6 @@ following will sample 100 sequences without replacement:
 ```sh
 samplefq -k 100 -1 read1.fastq -2 read2.fastq > read1_sample100.fastq 2> read2_sample100.fastq
 ```
+
+If you want to sample sequences from FASTA files instead of FASTQ, just use the
+```samplefa``` binary instead of the ```samplefq``` binary.
