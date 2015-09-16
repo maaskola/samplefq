@@ -15,10 +15,12 @@ using namespace std;
 
 const string program_name = "samplefa";
 
+const char separator_symbol = '>';
+
 void count_seq(istream &is, size_t &cnt) {
   string line;
   while (not is.eof() and getline(is, line))
-    if (line[0] == '>') {
+    if (line[0] == separator_symbol) {
       cnt++;
       getline(is, line);
     }
@@ -29,7 +31,7 @@ void print_out(istream &is, const vector<size_t> &idxs, ostream &os) {
   size_t idx = 0;
   auto it = begin(idxs);
   while (it != end(idxs) and getline(is, line))
-    if (line[0] == '>') {
+    if (line[0] == separator_symbol) {
       if (idx++ == *it) {
         it++;
         os << line << endl;
