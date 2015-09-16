@@ -29,7 +29,7 @@ void print_out(istream &is, const vector<size_t> &idxs, ostream &os) {
   size_t idx = 0;
   auto it = begin(idxs);
   while (it != end(idxs) and getline(is, line))
-    if (line[0] == '@') {
+    if (line[0] == '>') {
       if (idx++ == *it) {
         it++;
         os << line << endl;
