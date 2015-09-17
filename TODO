@@ -1,0 +1,2 @@
+* Add a switch -p to sample a given proportion of sequences
+* Factor samplefa / samplefq code
