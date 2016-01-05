@@ -32,9 +32,9 @@ void print_out(istream &is, const vector<size_t> &idxs, ostream &os) {
   string line;
   size_t idx = 0;
   auto it = begin(idxs);
-  while (it != end(idxs) and getline(is, line))
+  while (it != end(idxs) and getline(is, line)) {
     if (line[0] == separator_symbol) {
-      if (idx++ == *it) {
+      if (idx == *it) {
         it++;
         os << line << endl;
         getline(is, line);
@@ -43,8 +43,14 @@ void print_out(istream &is, const vector<size_t> &idxs, ostream &os) {
         os << line << endl;
         getline(is, line);
         os << line << endl;
+      } else {
+        getline(is, line);
+        getline(is, line);
+        getline(is, line);
       }
+      idx++;
     }
+  }
 }
 
 int main(int argc, char **argv) {
