@@ -197,6 +197,8 @@ int main(int argc, char **argv) {
             "Depending on their filename ending (.gz or .bz2), they will be uncompressed on\n"
             "the fly.\n"
          << endl;
+    cout << "Multi-line format variants of FASTQ are not supported; every FASTQ entry is\n"
+         << "expected to consist of four contiguous lines.\n";
     cout << desc << "\n";
     return EXIT_SUCCESS;
   }

@@ -25,6 +25,10 @@ Apart from FASTQ files, sampling can also be done from FASTA files. Input files
 can be compressed with gzip or bzip2, and are uncompressed on the fly. Two
 threads are used during output when pairs of files are processed.
 
+Limitations
+-----------
+Currently, multi-line format variants of FASTA and FASTQ are not supported.
+
 Installation
 ------------
 1. clone the repository
